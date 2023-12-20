@@ -1,0 +1,56 @@
+CREATE DATABASE ministerio;
+USE ministerio;
+
+CREATE TABLE IF NOT EXISTS nivel(
+	id_nivel integer PRIMARY KEY,
+    descricao_nivel varchar(15)
+);
+
+INSERT INTO nivel VALUES (1, "administrador");
+INSERT INTO nivel VALUES (2, "professor");
+
+CREATE TABLE IF NOT EXISTS usuarios(
+	id_usuario integer AUTO_INCREMENT PRIMARY KEY,
+    login varchar(15),
+    senha varchar(40),
+    nivel_usuario integer,
+    FOREIGN KEY (nivel_usuario) REFERENCES nivel(id_nivel)
+);
+
+INSERT INTO usuarios VALUES (1, "admin","admin", 1);
+
+CREATE TABLE IF NOT EXISTS turma(
+	id_turma integer AUTO_INCREMENT PRIMARY KEY,
+    nm_turma varchar(25)
+);
+
+CREATE TABLE IF NOT EXISTS professor(
+	id_professor integer AUTO_INCREMENT PRIMARY KEY,
+    nm_professor varchar(25),
+    turma_professor integer,
+    FOREIGN KEY (turma_professor) REFERENCES turma(id_turma)  
+);
+
+CREATE TABLE IF NOT EXISTS evento(
+	id_evento integer AUTO_INCREMENT PRIMARY KEY,
+    nm_evento varchar(25),
+    dt_hr_evento varchar(25),
+    descricao_evento text
+);
+
+CREATE TABLE IF NOT EXISTS recado(
+	id_recado integer AUTO_INCREMENT PRIMARY KEY,
+    autor_recado varchar(25),
+    destino_recado varchar(25),
+	titulo_recado varchar(25),
+  	dt_hr_recado varchar(25),
+    descricao_recado text
+);
+
+CREATE TABLE IF NOT EXISTS relatorio(
+	id_relatorio integer AUTO_INCREMENT PRIMARY KEY,
+    autor_relatorio varchar(25),
+   	titulo_relatorio varchar(25),
+	dt_hr_relatorio varchar(25),
+    descricao_relatorio text
+);
